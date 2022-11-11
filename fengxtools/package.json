@@ -12,5 +12,8 @@
   "devDependencies": {
     "@figma/plugin-typings": "^1.55.1",
     "typescript": "*"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }

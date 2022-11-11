@@ -19,10 +19,17 @@
 
 
   
+let np1s=["公元前","前","BC"]
+let np2s=["公元","AC"]
+
+
+// 奥古斯都（前63年9月23日－14年8月19日）
+// 白居易（772年2月28日－846年9月8日）
+// 白居易（772年2月28日－846年9月8日）
 
 
 // let sampleRegEx: RegExp = /(?<name>.*)（(?<start>[0-9]{1,4}).{0,1}[0-9]{0,2}.{0,1}[0-9]{0,2}..{0,1}(?<end>[0-9]{1,4}).{0,1}[0-9]{0,2}.{0,1}[0-9]{0,2}..{0,1}/;
-let sampleRegEx: RegExp = /(?<name>.*)（[\u4e00-\u9fa5]{0,3}(?<start>[0-9]{1,5})[\u4e00-\u9fa5]{0,1}[0-9]{0,2}[\u4e00-\u9fa5]{0,1}[0-9]{0,2}.[\u4e00-\u9fa5]{0,1}[－|-|—|-]{1}[\u4e00-\u9fa5]{0,3}(?<end>[0-9]{1,5})[\u4e00-\u9fa5]{0,1}[0-9]{0,2}[\u4e00-\u9fa5]{0,1}[0-9]{0,2}.[\u4e00-\u9fa5]{0,1}/;
+let sampleRegEx: RegExp = /(?<name>.*)（(?<np1>[\u4e00-\u9fa5]{0,3})(?<start>[0-9]{1,5})[\u4e00-\u9fa5]{0,1}[0-9]{0,2}[\u4e00-\u9fa5]{0,1}[0-9]{0,2}.[\u4e00-\u9fa5]{0,1}[－|-|—|-]{1}(?<np2>[\u4e00-\u9fa5]{0,3})(?<end>[0-9]{1,5})[\u4e00-\u9fa5]{0,1}[0-9]{0,2}[\u4e00-\u9fa5]{0,1}[0-9]{0,2}.[\u4e00-\u9fa5]{0,1}/;
 // Runs this code if the plugin is run in Figma
 if (figma.editorType === 'figma') {
   // This plugin will open a window to prompt the user to enter a number, and
@@ -34,9 +41,24 @@ if (figma.editorType === 'figma') {
   // callback. The callback will be passed the "pluginMessage" property of the
   // posted message.
   (async () => {
-    await figma.loadFontAsync({ family: "Inter", style: "Regular" })
+    await figma.loadFontAsync({ family: "Inter", style: "Bold"})
   })()
-
+  // position: absolute;
+  // width: 70.75px;
+  // height: 7.83px;
+  
+  // font-family: 'Work Sans';
+  // font-style: normal;
+  // font-weight: 700;
+  // font-size: 35px;
+  // line-height: 41px;
+  // display: flex;
+  // align-items: center;
+  // text-align: center;
+  // letter-spacing: -0.02em;
+  
+  // color: #000000;
+  
 
 function createBox(test1:any) {
   const nodes: SceneNode[] = [];
@@ -47,9 +69,22 @@ function createBox(test1:any) {
   const name = matches.groups.name;
   const start = matches.groups.start;
   const end = matches.groups.end;
-  box.y=parseInt(start, 10);
+  const np1 = matches.groups.np1;
+  const np2 = matches.groups.np2;
+
+  let np1n=1;
+  let np2n=1;
+  if (np1s.indexOf(np1)>-1){
+    np1n=-1;
+  }
+  if (np1s.indexOf(np2)>-1){
+    np2n=-1;
+  }
+
+
+  box.y=np1n*parseInt(start, 10);
   box.x=-3600
-  box.resize(60,parseInt(end, 10)-box.y);
+  box.resize(60,np2n*parseInt(end, 10)-box.y);
   
   text.y=box.y;
   text.x=-3600

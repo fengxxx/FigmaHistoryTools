@@ -1,6 +1,6 @@
-<h2>Shape Creator</h2>
-<p>Count: <input id="count" type="number" value="5"></p>
-<p>years: <input id="years" type="string" value="白居易（772年2月28日－846年9月8日）"></p>
+<!-- <h2>Event Box Creator</h2> -->
+<!-- <p>Count: <input id="count" type="number" value="5"></p> -->
+<p>years: <input id="years" type="string" value="奥古斯都（前63年9月23日－14年8月19日）"></p>
 <button id="create">Create</button>
 <!-- <button id="cancel">Cancel</button> -->
 <script>
@@ -8,7 +8,7 @@
 document.getElementById('create').onclick = () => {
   const textbox = document.getElementById('count');
   const textyearbox = document.getElementById('years');
-  const count = parseInt(textbox.value, 10);
+  // const count = parseInt(textbox.value, 10);
   const yearstr = textyearbox.value;
   parent.postMessage({ pluginMessage: { type: 'createyear', yearstr } }, '*')
 }
