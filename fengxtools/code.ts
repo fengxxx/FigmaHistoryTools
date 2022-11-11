@@ -17,10 +17,10 @@
 
 // interface Navigator extends NavigatorClipboard {}
 
-
+// https://www.figma.com/plugin-docs/setup/
   
 let np1s=["公元前","前","BC"]
-let np2s=["公元","AC"]
+// let np2s=["公元","AC"]
 
 
 // 奥古斯都（前63年9月23日－14年8月19日）
@@ -41,7 +41,7 @@ if (figma.editorType === 'figma') {
   // callback. The callback will be passed the "pluginMessage" property of the
   // posted message.
   (async () => {
-    await figma.loadFontAsync({ family: "Inter", style: "Bold"})
+    await figma.loadFontAsync({ family: "Inter", style: "Regular"})
   })()
   // position: absolute;
   // width: 70.75px;
@@ -81,31 +81,34 @@ function createBox(test1:any) {
     np2n=-1;
   }
 
+  console.log(matches.groups);
 
   box.y=np1n*parseInt(start, 10);
-  box.x=-3600
+  console.log(np1n);
+
+  box.x=-3600;
   box.resize(60,np2n*parseInt(end, 10)-box.y);
   
   text.y=box.y;
   text.x=-3600
-
   text.resize(box.width,box.height);
-
   text.name=name;
-  
   text.characters = name;
   text.fontSize = 18;
+
   text.fills = [{ type: 'SOLID', color: { r: 0, g: 0, b: 0 } }]
 
   text.characters=name;
   box.fills = [{type: 'SOLID', color: {r: 1, g: 0.5, b: 0}}];
+  console.log(box);
+
   figma.currentPage.appendChild(box);
+  figma.currentPage.appendChild(text);
   nodes.push(text);
   nodes.push(box);
   const g= figma.group([box], figma.currentPage);
    g.appendChild(text)
   
-
   figma.currentPage.selection = nodes;
   figma.viewport.scrollAndZoomIntoView(nodes);
 
